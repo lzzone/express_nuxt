@@ -1,10 +1,11 @@
 module.exports = {
     srcDir: "app/",
     dev:false,
-    cache: true,
+    cache: false,
+    analyze: true,
     build: {
         extractCSS: { allChunks: true },//chenzhe modify
-        vendor: ["axios", "~/plugins/MuseUI.js"]
+        vendor: ['axios',"~/plugins/axios.js", "~/plugins/MuseUI.js"]
     },
     head: {
         link: [
@@ -29,7 +30,7 @@ module.exports = {
           ]
     },
     plugins: [
-        { src: "~/plugins/MuseUI.js", ssr: true },
+        { src: "~/plugins/MuseUI.js" },
         {
             src: "~/plugins/i18n.js", ssr: true
         }

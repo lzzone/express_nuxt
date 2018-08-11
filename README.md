@@ -1,4 +1,17 @@
+## 开发环境
+ >如果不可用的话请全局安装`nodemon`
+```
+npm run dev
+```
 
-"dev": "node index.js",
-"build": "nuxt build",
-"start": "cross-env NODE_ENV=production node index.js"
+## 部署
+```
+npm run build
+# build之后
+npm run start
+```
+
+用pm2可以直接替换`npm run start` 命令
+```
+pm2 start index.js
+```

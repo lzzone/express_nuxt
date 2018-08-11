@@ -19,6 +19,8 @@
             <mu-button flat slot="right" to="/zh" v-if="locale!='zh'">中文</mu-button>
 
             <mu-button flat slot="right" to="./user/login">{{ $t('index.login') }}</mu-button>
+            <mu-button flat slot="right" to="./api/v1/user/logout">{{ $t('index.logout') }}</mu-button>
+            <a href="/api/v1/user/logout">luyou</a>
         </mu-appbar>
 
         <mu-drawer :open.sync="open" :docked="docked">
@@ -38,8 +40,10 @@
         <p>
             {{ $t('index.title') }}
             <mu-button color="primary">Primary</mu-button>
-            <button @click="increment">{{ counter }}</button><br> {{$store.state.authUser.username}}
-            <button @click="login">{{ $t('index.login') }}</button>
+            <button @click="increment">{{ counter }}</button>
+            
+            <br> {{$store.state.user.name}}
+            
             <!-- <nuxt-link to="/about">About</nuxt-link> -->
         </p>
         <div v-for="item of indexlist" :key="item.id">
@@ -72,7 +76,7 @@ export default {
       })
       .then(function(response) {
         if (response.data.errno != 1) {
-          alert(response.data.msg);
+          // alert(response.data.msg);
           return;
         }
         store.commit("indexlistFn", response.data.data);
@@ -90,12 +94,9 @@ export default {
   },
   methods: {
     increment() {
-      this.$toast.message("hello world");
+      // this.$toast.message("hello world");
       this.$store.commit("increment");
-    },
-    async login() {
-      var data = await axios.get("/api/login");
-      console.log(data);
+      // console.log(this.$router)
     }
   },
   mounted() {

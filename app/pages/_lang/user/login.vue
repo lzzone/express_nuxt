@@ -93,7 +93,7 @@ input {
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
   data() {
     return {
@@ -103,13 +103,18 @@ export default {
   },
   methods: {
     async login() {
-      var data = await axios.post("/api/login", {
-        data: {
-          name: this.name,
-          pwd: this.pwd,
-        }
+      var data = await this.$http.post("/api/v1/user/login", {
+        name: this.name,
+        pwd: this.pwd,
       });
-      console.log(data);
+      if(data.errno==1){
+        this.$toast.message(data.errmsg);
+        // this.$router.replace('/');
+        window.location.href='../../';
+        
+      }else{
+         this.$toast.message(data.errmsg);
+      }
     }
   }
 };

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "build": "nuxt build",
+    "build": "nuxt build --analyze",
     "start": "node index.js"
   },
   "author": "",
@@ -26,6 +26,7 @@
     "babel-plugin-import": "^1.8.0",
     "cross-env": "^5.2.0",
     "less": "^3.8.1",
-    "less-loader": "^4.1.0"
+    "less-loader": "^4.1.0",
+    "nodemon": "^1.18.3"
   }
 }

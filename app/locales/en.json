@@ -1,6 +1,7 @@
 {
     "index": {
         "title": "this is title",
-        "login":"login"
+        "login":"login",
+        "logout":"logout"
     }
 }

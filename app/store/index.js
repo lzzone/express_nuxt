@@ -7,7 +7,7 @@ const createStore = () => {
             locale: "zh",
 
             counter: 0,
-            authUser: {},
+            user: {},
             indexlist: []
         },
         mutations: {
@@ -18,7 +18,7 @@ const createStore = () => {
                 state.indexlist = data;
             },
             SET_USER: function(state, user) {
-                state.authUser = user;
+                state.user = user;
             },
             SET_LANG(state, locale) {
                 if (state.locales.indexOf(locale) !== -1) {
@@ -28,8 +28,8 @@ const createStore = () => {
         },
         actions: {
             nuxtServerInit({ commit }, { req }) {
-                if (req.session && req.session.authUser) {
-                    commit("SET_USER", req.session.authUser);
+                if (req.session && req.session.user) {
+                    commit("SET_USER", req.session.user);
                 }
             }
         }

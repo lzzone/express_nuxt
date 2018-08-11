@@ -1,6 +1,7 @@
 {
     "index": {
         "title": "这是标题",
-        "login":"登录"
+        "login":"登录",
+        "logout":"退出"
     }
 }
