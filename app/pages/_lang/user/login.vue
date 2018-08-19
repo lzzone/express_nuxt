@@ -85,7 +85,7 @@ input {
         </div>
         <div class="row right">
             <span class="text light">还没有帐号，</span>
-            <!-- <mu-button  to="/regist">立即注册</mu-button> -->
+            <!-- <mu-button  to="./register">立即注册</mu-button> -->
             <a href="./register" class="text dark">立即注册</a>
         </div>
 
