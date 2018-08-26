@@ -5,15 +5,11 @@ const createStore = () => {
         state: {
             locales: ["en", "zh"],
             locale: "zh",
-
-            counter: 0,
             user: {},
             indexlist: []
         },
         mutations: {
-            increment(state) {
-                state.counter++;
-            },
+
             indexlistFn(state, data) {
                 state.indexlist = data;
             },

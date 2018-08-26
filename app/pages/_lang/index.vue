@@ -15,11 +15,14 @@
             </mu-button>
             adtk.cn
             <!-- {{locale}} -->
+            {{$store.state.user.name}}
+            
             <mu-button flat slot="right" to="/en" v-if="locale!='en'">english</mu-button>
             <mu-button flat slot="right" to="/zh" v-if="locale!='zh'">中文</mu-button>
 
-            <mu-button flat slot="right" to="./user/login">{{ $t('index.login') }}</mu-button>
-            <mu-button flat slot="right" href="./api/v1/user/logout">{{ $t('index.logout') }}</mu-button>
+            <mu-button v-if="!$store.state.user.id"  flat slot="right" to="./user/login">{{ $t('index.login') }}</mu-button>
+            <!-- href="./api/v1/user/logout" -->
+            <mu-button v-else-if="$store.state.user" flat slot="right" @click="logout" >{{ $t('index.logout') }}</mu-button>
         </mu-appbar>
 
         <mu-drawer :open.sync="open" :docked="docked">
@@ -36,16 +39,10 @@
             </mu-list>
         </mu-drawer>
 
-        <p>
-            {{ $t('index.title') }}
-            <mu-button color="primary">Primary</mu-button>
-            <button @click="increment">{{ counter }}</button>
-            
-            <br> {{$store.state.user.name}}
-
-        </p>
         <div v-for="item of indexlist" :key="item.id">
-            {{item.title}}
+            <!-- <div>{{item.title}}</div> -->
+            <a :href="'./bbs/'+item.id">{{item.title}}</a>
+             <mu-divider></mu-divider>
         </div>
 
     </div>
@@ -53,9 +50,6 @@
 
 <script>
 import { mapState } from "vuex";
-import axios from "axios";
-
-var url = "https://adtk.cn";
 
 export default {
     data() {
@@ -70,21 +64,16 @@ export default {
       title: this.title
     };
   },
-  fetch({ store, query }) {
+  fetch({ store, query,app }) {
     // 返回promise对象
-    return axios
-      .get(url + "/bbs/get?getTime=" + parseInt(Date.now() / 10000), {
-        params: {
-          page: 1,
-          bbs_class: query.bbs_class || ""
-        }
-      })
+    return app.$axios.$get("/api/v1/bbs/get")
       .then(function(response) {
-        if (response.data.errno != 1) {
+        console.log(response)
+        if (response.errno != 1) {
           // alert(response.data.msg);
           return;
         }
-        store.commit("indexlistFn", response.data.data);
+        store.commit("indexlistFn", response.data);
       });
   },
   computed: {
@@ -92,10 +81,13 @@ export default {
   },
 
   methods: {
-    increment() {
-      // this.$toast.message("hello world");
-      this.$store.commit("increment");
-      // console.log(this.$router)
+    logout(){
+      this.$axios.$get('/api/v1/user/logout').then(res=>{
+        if(res.errno==1){
+            this.$store.commit('SET_USER',{})
+        }
+
+      })
     }
   },
   mounted() {

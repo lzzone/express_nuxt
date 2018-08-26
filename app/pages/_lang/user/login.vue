@@ -84,9 +84,10 @@ input {
             <input type="button" class="button dark submit" @click.stop.prevent="login()" value="账号登录">
         </div>
         <div class="row right">
+
             <span class="text light">还没有帐号，</span>
-            <!-- <mu-button  to="./register">立即注册</mu-button> -->
             <a href="./register" class="text dark">立即注册</a>
+            <!-- <span id="qqLoginBtn">登录</span> -->
         </div>
 
     </div>
@@ -98,24 +99,38 @@ export default {
   data() {
     return {
       name: "",
-      pwd: ""
+      pwd: "",
+      title:"登录"
+    };
+  },
+  head() {
+    return {
+      title: this.title,
+      // script: [
+      //   {
+      //     src: "https://connect.qq.com/qc_jssdk.js",
+      //     "data-appid": "1105255719"
+      //   }
+      // ]
     };
   },
   methods: {
     async login() {
-      var data = await this.$http.post("/api/v1/user/login", {
+      var data = await this.$axios.$post("/api/v1/user/login", {
         name: this.name,
-        pwd: this.pwd,
+        pwd: this.pwd
       });
-      if(data.errno==1){
+      if (data.errno == 1) {
         this.$toast.message(data.errmsg);
         // this.$router.replace('/');
-        window.location.href='../../';
-        
-      }else{
-         this.$toast.message(data.errmsg);
+        window.location.href = "../../";
+      } else {
+        this.$toast.message(data.errmsg);
       }
     }
+  },
+  mounted() {
+
   }
 };
 </script>

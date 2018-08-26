@@ -74,23 +74,21 @@ input {
         <div class="row">
             <input type="text" class="text" autocomplete="off" name="name" v-model="name" placeholder="昵称">
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <input type="text" class="text" autocomplete="off" name="name" v-model="name" placeholder="邮箱">
-        </div>
+        </div> -->
         <div class="row">
             <input type="password" class="text" autocomplete="off" name="pwd" v-model="pwd" placeholder="密码">
         </div>
+
         <div class="row">
-            <a href="javascript:alert('别着急,找回密码功能我是不会开发的...')" class="forget text dark">忘记密码</a>
-        </div>
-        <div class="row">
-            <mu-button color="primary" @click="email">email</mu-button>
+            <!-- <mu-button color="primary" @click="email">email</mu-button> -->
             <input type="button" class="button dark submit" @click.stop.prevent="register()" value="账号注册">
         </div>
         <div class="row right">
             <span class="text light">已有帐号，</span>
             <a href="./login" class="text dark">立即登录</a>
-              <span id="qqLoginBtn">登录</span>
+              <!-- <span id="qqLoginBtn">登录</span> -->
         </div>
 
     </div>
@@ -109,9 +107,9 @@ export default {
   head() {
     return {
       title: this.title,
-      script: [
-        { src: "https://connect.qq.com/qc_jssdk.js", "data-appid": "101293384" }
-      ]
+      // script: [
+      //   { src: "https://connect.qq.com/qc_jssdk.js", "data-appid": "101293384" }
+      // ]
     };
   },
   methods: {
@@ -126,7 +124,7 @@ export default {
       }
     },
     async register() {
-      var data = await this.$http.post("/api/v1/user/register", {
+      var data = await this.$axios.$post("/api/v1/user/register", {
         name: this.name,
         pwd: this.pwd
       });
@@ -141,28 +139,28 @@ export default {
   },
   mounted() {
     //调用QC.Login方法，指定btnId参数将按钮绑定在容器节点中
-    QC.Login(
-      {
-        //btnId：插入按钮的节点id，必选
-        btnId: "qqLoginBtn",
-        //用户需要确认的scope授权项，可选，默认all
-        scope: "all",
-        //按钮尺寸，可用值[A_XL| A_L| A_M| A_S|  B_M| B_S| C_S]，可选，默认B_S
-        size: "B_S"
-      },
-      function(reqData, opts) {
-        //登录成功
-        console.log(reqData, opts);
-         QC.Login.getMe(function(openId, accessToken){
-           console.log(openId,accessToken)
-         })
+    // QC.Login(
+    //   {
+    //     //btnId：插入按钮的节点id，必选
+    //     btnId: "qqLoginBtn",
+    //     //用户需要确认的scope授权项，可选，默认all
+    //     scope: "all",
+    //     //按钮尺寸，可用值[A_XL| A_L| A_M| A_S|  B_M| B_S| C_S]，可选，默认B_S
+    //     size: "B_S"
+    //   },
+    //   function(reqData, opts) {
+    //     //登录成功
+    //     console.log(reqData, opts);
+    //      QC.Login.getMe(function(openId, accessToken){
+    //        console.log(openId,accessToken)
+    //      })
 
-      },
-      function(opts) {
-        //注销成功
-        alert("QQ登录 注销成功");
-      }
-    );
+    //   },
+    //   function(opts) {
+    //     //注销成功
+    //     alert("QQ登录 注销成功");
+    //   }
+    // );
   }
 };
 </script>

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 // import MuseUI from 'muse-ui';
-import { AppBar, Button,Icon ,Drawer,List,Snackbar} from 'muse-ui';
+import { AppBar, Button,Icon ,Drawer,Divider,LoadMore,List,Snackbar} from 'muse-ui';
 
 
 import Toast from 'muse-ui-toast';
@@ -14,6 +14,8 @@ Vue.use(AppBar);
 Vue.use(Button);
 Vue.use(Icon);
 Vue.use(Drawer);
+Vue.use(Divider);
+Vue.use(LoadMore);
 
 Vue.use(List);
 Vue.use(Snackbar);
