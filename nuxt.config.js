@@ -50,9 +50,9 @@ module.exports = {
         {
             src: "~/plugins/i18n.js", ssr: true
         },
-        {
-            src: "~/plugins/VueQuillEditor.js", ssr: false
-        }
+        // {
+        //     src: "~/plugins/VueQuillEditor.js", ssr: false
+        // }
     ],
     // css: ["muse-ui/dist/muse-ui.css"]
 };

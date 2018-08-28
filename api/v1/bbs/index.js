@@ -3,8 +3,10 @@ var router = express.Router();
 
 
 router.get('/get', function (req, res) {
-  req.sql.query("SELECT id,title FROM bbs", [], function (err, result, fields) {
-    if (result.length >= 1) {
+  req.sql.query("SELECT id,title FROM bbs ORDER BY id DESC", [], function (err, result, fields) {
+    if(err){
+        throw err
+    }else if (result.length >= 1) {
         res.back(1,result,'获取成功');
     } else  {
       res.back(-1,result,'没有数据' );

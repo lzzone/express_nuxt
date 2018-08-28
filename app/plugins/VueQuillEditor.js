@@ -35,7 +35,7 @@ if (process.browser) {
                 ['clean']                                         // remove formatting button
               ],
             syntax: {
-              highlight: text => hljs.highlightAuto(text).value
+              highlight: text => hljs.highlightAuto(text).value```````````````````````````````````````````````````````````````
             }
         }
     })

@@ -6,7 +6,8 @@ var sendMail=require("../../../config/email.js");
 router.post('/login', function (req, res) {
   req.sql.query("SELECT * FROM user WHERE `name` = ? ", [req.body.name], function (err, result, fields) {
     if (result.length == 1) {
-      if (req.body.pwd == result[0].pwd) {
+      
+      if (bcrypt.compareSync(req.body.pwd, result[0].pwd)) {
         delete result[0].pwd;
         req.session.user = result[0];
         res.back(1,req.session,'登录成功');
@@ -45,9 +46,12 @@ router.post('/register', function (req, res) {
       res.back(-1,'账户已被注册' );
     } else if (result.length == 0) {
       if (req.body.pwd) {
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(req.body.pwd, salt);
+        console.log(hash);
         req.sql.query('insert into user set ?',{
           name:req.body.name,
-          pwd:req.body.pwd
+          pwd:hash
         },function(err,result){
           if(err){
             res.back(-1,err,'注册失败');
