@@ -78,7 +78,7 @@ input {
       <input type="password" class="text" autocomplete="off" name="pwd" v-model="pwd" :placeholder="$t('login.password')">
     </div>
     <div class="row">
-      <a href='javascript:alert("not have this function，because Im lazy")' class="forget text dark">{{ $t('login.forget') }}</a>
+      <a href='#' @click="forget" class="forget text dark">{{ $t('login.forget') }}</a>
     </div>
     <div class="row">
       <input type="button" class="button dark submit" @click.stop.prevent="login()" :value="$t('login.loginButtom')">
@@ -100,18 +100,12 @@ export default {
     return {
       name: "",
       pwd: "",
-      title: "登录"
+      // title: this.$t('login.title')
     };
   },
   head() {
     return {
-      title: this.title,
-      // script: [
-      //   {
-      //     src: "https://connect.qq.com/qc_jssdk.js",
-      //     "data-appid": "1105255719"
-      //   }
-      // ]
+      title: this.$t('login.title'),
     };
   },
   methods: {
@@ -127,7 +121,11 @@ export default {
       } else {
         this.$toast.message(data.errmsg);
       }
+    },
+    forget() {
+      this.$alert(this.$t("login.forgetTips"), 'tips');
     }
+
   },
   mounted() {
 

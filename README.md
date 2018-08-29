@@ -33,6 +33,11 @@ email 字段为邮件发送
         "password": "",
         "database": ""
     },
+    "redis": {
+        "host": "",
+        "port": "6379",
+        "password": ""
+    },
     "email": {
         "host": "smtp.qq.com",
         "user": "",

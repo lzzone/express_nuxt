@@ -68,7 +68,7 @@ export default {
     // 返回promise对象
     return app.$axios.$get("/api/v1/bbs/get")
       .then(function (response) {
-        console.log(response)
+        // console.log(response)
         if (response.errno != 1) {
           // alert(response.data.msg);
           return;

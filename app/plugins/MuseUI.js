@@ -6,6 +6,7 @@ import {
     Button,
     Icon,
     Drawer,
+    Dialog,
     Divider,
     LoadMore,
     List,
@@ -17,12 +18,16 @@ import "muse-ui/lib/styles/theme.less";
 
 import Toast from "muse-ui-toast";
 Vue.use(Toast);
+import Message from "muse-ui-message";
+Vue.use(Message);
 
 // import "muse-ui/dist/muse-ui.css";
 Vue.use(AppBar);
 Vue.use(Button);
 Vue.use(Icon);
 Vue.use(Drawer);
+Vue.use(Dialog);
+
 Vue.use(Divider);
 Vue.use(LoadMore);
 
