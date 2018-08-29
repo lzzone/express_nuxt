@@ -1,7 +1,19 @@
 {
     "index": {
         "title": "这是标题",
-        "login":"登录",
-        "logout":"退出"
+        "login": "登录",
+        "logout": "退出"
+    },
+    "login": {
+        "title": "登录",
+        "nickname": "昵称",
+        "password": "密码",
+
+        "forget": "忘记密码",
+        "forgetTips": "别着急,找回密码功能我是不会开发的...",
+
+        "loginButtom": "账号登录",
+        "goRigster": "立即注册",
+        "goRigsterTips": "还没有账号"
     }
 }

@@ -1,7 +1,18 @@
 {
     "index": {
         "title": "this is title",
-        "login":"login",
-        "logout":"logout"
+        "login": "login",
+        "logout": "logout"
+    },
+    "login": {
+        "title": "login",
+        "nickname": "nickname",
+        "password": "password",
+
+        "forget": "forget password",
+        "forgetTips": " I won't be able to get my password back...",
+        "loginButtom": "login",
+        "goRigster": "Go to register",
+        "goRigsterTips": "No account yet"
     }
 }

@@ -1,40 +1,40 @@
 {
-  "name": "blog",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "build": "nuxt build --analyze",
-    "start": "node index.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "bcrypt": "^3.0.0",
-    "body-parser": "^1.18.3",
-    "express": "^4.16.3",
-    "express-session": "^1.15.6",
-    "highlight.js": "^9.12.0",
-    "markdown-it": "^8.4.2",
-    "muse-ui": "^3.0.0-rc.7",
-    "muse-ui-toast": "^0.3.0",
-    "mysql": "^2.16.0",
-    "nodemailer": "^4.6.8",
-    "nuxt": "^1.4.2",
-    "vue-i18n": "^8.0.0",
-    "vue-quill-editor": "^3.0.6",
-    "vuex": "^3.0.1",
-    "xss": "^1.0.3"
-  },
-  "devDependencies": {
-    "@nuxtjs/axios": "^5.3.1",
-    "@nuxtjs/proxy": "^1.2.4",
-    "babel-plugin-import": "^1.8.0",
-    "cross-env": "^5.2.0",
-    "less": "^3.8.1",
-    "less-loader": "^4.1.0",
-    "nodemon": "^1.18.3"
-  }
+    "name": "blog",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "cross-env NODE_ENV=development nodemon index.js",
+        "build": "nuxt build --analyze",
+        "start": "node index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^3.0.0",
+        "body-parser": "^1.18.3",
+        "express": "^4.16.3",
+        "express-session": "^1.15.6",
+        "highlight.js": "^9.12.0",
+        "log4js": "^3.0.5",
+        "markdown-it": "^8.4.2",
+        "muse-ui": "^3.0.0",
+        "muse-ui-toast": "^0.3.0",
+        "mysql": "^2.16.0",
+        "nodemailer": "^4.6.8",
+        "nuxt": "^1.4.2",
+        "vue-i18n": "^8.0.0",
+        "vuex": "^3.0.1",
+        "xss": "^1.0.3"
+    },
+    "devDependencies": {
+        "@nuxtjs/axios": "^5.3.1",
+        "@nuxtjs/proxy": "^1.2.4",
+        "babel-plugin-import": "^1.8.0",
+        "cross-env": "^5.2.0",
+        "less": "^3.8.1",
+        "less-loader": "^4.1.0",
+        "nodemon": "^1.18.3",
+        "webpack-node-externals": "^1.7.2"
+    }
 }
