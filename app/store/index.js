@@ -6,13 +6,8 @@ const createStore = () => {
             locales: ["en", "zh"],
             locale: "zh",
             user: {},
-            indexlist: []
         },
         mutations: {
-
-            indexlistFn(state, data) {
-                state.indexlist = data;
-            },
             SET_USER: function(state, user) {
                 state.user = user;
             },

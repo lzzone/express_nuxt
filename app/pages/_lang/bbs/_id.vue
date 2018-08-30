@@ -14,7 +14,7 @@
         <mu-icon value="close"></mu-icon>
       </mu-button>
 
-      <mu-button slot="right" v-if="bbs.user==$store.state.user.id||$store.state.user.is_admin==1">
+      <mu-button slot="right" v-if="bbs.user==$store.state.user.id">
         编辑
       </mu-button>
       <mu-button icon slot="right" v-if="bbs.user==$store.state.user.id||$store.state.user.is_admin==1">
@@ -65,7 +65,7 @@ export default {
   },
   head() {
     return {
-      title: this.title,
+      title: this.bbs.title||this.title,
       link: [
         {
           rel: "stylesheet",
