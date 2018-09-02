@@ -72,16 +72,16 @@ input {
   <div class="login">
     <h3>{{ $t('login.title') }}</h3>
     <div class="row">
-      <input type="text" class="text" autocomplete="off" name="name" v-model="name" :placeholder="$t('login.nickname')">
+      <input type="text" class="text" @keyup.enter="login" autocomplete="off" name="name" v-model="name" :placeholder="$t('login.nickname')">
     </div>
     <div class="row">
-      <input type="password" class="text" autocomplete="off" name="pwd" v-model="pwd" :placeholder="$t('login.password')">
+      <input type="password" @keyup.enter="login" class="text" autocomplete="off" name="pwd" v-model="pwd" :placeholder="$t('login.password')">
     </div>
     <div class="row">
       <a href='#' @click="forget" class="forget text dark">{{ $t('login.forget') }}</a>
     </div>
     <div class="row">
-      <input type="button" class="button dark submit" @click.stop.prevent="login()" :value="$t('login.loginButtom')">
+      <input type="button" class="button dark submit"  @click="login()" :value="$t('login.loginButtom')">
     </div>
     <div class="row right">
 
@@ -94,13 +94,12 @@ input {
 </template>
 
 <script>
-// import axios from "axios";
+
 export default {
   data() {
     return {
       name: "",
       pwd: "",
-      // title: this.$t('login.title')
     };
   },
   head() {
@@ -115,9 +114,10 @@ export default {
         pwd: this.pwd
       });
       if (data.errno == 1) {
+        // console.log(data.data);
         this.$toast.message(data.errmsg);
-        // this.$router.replace('/');
-        window.location.href = "../../";
+        this.$store.commit("SET_USER", data.data.user);
+        this.$router.push(this.$i18n.path(''));
       } else {
         this.$toast.message(data.errmsg);
       }

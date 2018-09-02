@@ -70,6 +70,24 @@ router.post('/register', function (req, res) {
   });
 })
 
+// 获取用户信息
+router.get('/userinfo/:id', function (req, res,next) {
+
+  if(req.params.id&&parseInt(req.params.id)){
+      req.sql.query("SELECT id,name FROM user WHERE `id` = ? ", [parseInt(req.params.id)], function (err, result) {
+        console.log(result);
+        if(err){
+              res.back(-1,'查询失败');
+          }else if(result.length==1){
+              res.back(1,result[0],'成功');
+          }else{
+              res.back(-1,'没有用户信息');
+          }
+      })  
+  }else{
+      res.back(-1,'缺少信息');
+  }    
+})
 
 // 退出登录
 router.get('/logout', function (req, res,next) {

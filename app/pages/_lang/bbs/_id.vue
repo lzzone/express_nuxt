@@ -1,8 +1,11 @@
 <style lang="less" scoped>
 .bbsContent {
-    max-width: 940px;
-    margin: 30px auto;
-    padding: 0 20px;
+  max-width: 940px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+.textRight {
+  text-align: right;
 }
 </style>
 
@@ -15,39 +18,68 @@
       </mu-button>
 
       <mu-button slot="right" v-if="bbs.user==$store.state.user.id">
+        上首页
+      </mu-button>
+      <mu-button slot="right" v-if="bbs.user==$store.state.user.id">
         编辑
       </mu-button>
+
       <mu-button icon slot="right" v-if="bbs.user==$store.state.user.id||$store.state.user.is_admin==1">
         <mu-icon value="delete"></mu-icon>
       </mu-button>
 
     </mu-appbar>
     <!-- {{$store.state.user}} -->
-    <div class="bbsContent markdown-body" v-html="bbsContent">
+    <div class="bbsContent">
+      <div class="markdown-body" v-html="bbsContent"></div>
 
+      <div class="evaluate textRight">
+          <mu-button color="primary">
+            收藏
+            <mu-icon value="favorite_border" right></mu-icon>
+            <!-- favorite -->
+          </mu-button>
+          <mu-button color="red">
+            质量低
+            <mu-icon value="delete_sweep" right></mu-icon>
+          </mu-button>
+      </div>
+
+       <mu-text-field v-model="reply" multi-line :rows="4" :rows-max="8" full-width placeholder="评论"></mu-text-field>
+       <div class="textRight">
+        <mu-button color="primary">
+          Send
+          <mu-icon right value="send"></mu-icon>
+        </mu-button>
+       </div>
+      <div class="replyArr" v-for="item of replyArr" :key="item.id">
+        {{item.reply_content}}
+      </div>
     </div>
 
   </div>
 </template>
 
 <script>
-
 if (process.browser) {
-  require('~/assets/markdown.css')
+  require("~/assets/markdown.css");
   // var hljs = require("highlight.js");
   // var MarkdownIt = require("markdown-it");
   var md = window.markdownit({
-    highlight: function (str, lang) {
+    highlight: function(str, lang) {
       try {
-        return '<pre class="hljs"><code>' +
+        return (
+          '<pre class="hljs"><code>' +
           hljs.highlightAuto(str).value +
-          '</code></pre>';
-      } catch (__) { }
-      return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+          "</code></pre>"
+        );
+      } catch (__) {}
+      return (
+        '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + "</code></pre>"
+      );
     }
   });
 }
-
 
 export default {
   data() {
@@ -60,16 +92,19 @@ export default {
       editorOption: {
         theme: "snow",
         placeholder: "Compose an epic..."
-      }
+      },
+      reply: "",
+      replyArr: []
     };
   },
   head() {
     return {
-      title: this.bbs.title||this.title,
+      title: this.bbs.title || this.title,
       link: [
         {
           rel: "stylesheet",
-          href: " https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css"
+          href:
+            " https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css"
         }
       ],
       script: [
@@ -78,8 +113,7 @@ export default {
         },
         {
           src: "https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"
-        },
-
+        }
       ]
     };
   },
@@ -87,12 +121,12 @@ export default {
     if (!params.id) {
       return;
     }
-    var res = await app.$axios.$get(`/api/v1/bbs/get/${params.id}`, {
-      // name: this.name,
-      // pwd: this.pwd
-    });
+    var bbs_res = await app.$axios.$get(`/api/v1/bbs/get/${params.id}`);
+    var bbs_reply_res = await app.$axios.$get(`/api/v1/bbs/reply/${params.id}`);
+    console.log(bbs_reply_res);
     return {
-      bbs: res.data.length == 1 ? res.data[0] : {}
+      bbs: bbs_res.data.length == 1 ? bbs_res.data[0] : {},
+      replyArr: bbs_reply_res.data
     };
   },
   computed: {

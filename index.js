@@ -13,11 +13,11 @@ app.use(bodyParser.json());
 // Sessions 来创建 req.session
 app.use(
     session({
-        store: new RedisStore({
-            host: key.redis.host,
-            port: key.redis.port || 6739,
-            pass: key.redis.pass
-        }),
+        // store: new RedisStore({
+        //     host: key.redis.host,
+        //     port: key.redis.port || 6739,
+        //     pass: key.redis.pass
+        // }),
 
         secret: key.secret || "secret",
         resave: false,
@@ -28,7 +28,7 @@ app.use(
 //检查 redis是否可用
 app.use(function(req, res, next) {
     if (!req.session) {
-        res.send({ errno: -1, data: "无法提供服务", errmsg: "session异常" });
+        res.send({ errno: -1, data: [], errmsg: "session异常" });
     }
     next(); // otherwise continue
 });
@@ -36,6 +36,15 @@ app.use(function(req, res, next) {
 // 加载所有api
 var api = require("./api/index.js");
 app.use("/api", api);
+
+
+// app.use(function(err, req, res, next) {
+//     res.status(err.status || 500); // 状态码默认为500（服务器内部错误）
+//     res.render('error', {
+//         message: err.message,
+//         error: err    // 生产环境中应设为 `error: {}`，禁止输出错误
+//     });
+// });
 
 // 我们用这些选项初始化 Nuxt.js：
 const isProd = process.env.NODE_ENV === "development";

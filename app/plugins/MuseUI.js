@@ -10,7 +10,8 @@ import {
     Divider,
     LoadMore,
     List,
-    Snackbar
+    Snackbar,
+    TextField,
 } from "muse-ui";
 
 // import theme from "muse-ui/lib/theme";
@@ -33,6 +34,7 @@ Vue.use(LoadMore);
 
 Vue.use(List);
 Vue.use(Snackbar);
+Vue.use(TextField);
 
 // theme.addCreateTheme(theme => {
 //     return `

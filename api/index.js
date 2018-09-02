@@ -11,6 +11,7 @@ router.use(function(req, res, next) {
 
         if (errno !== 1) {
             errmsg = data;
+            data=[];
         }
         res.send({ errno, data, errmsg });
     };
