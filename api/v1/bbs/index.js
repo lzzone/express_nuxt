@@ -83,22 +83,5 @@ router.get("/get/:id", function(req, res) {
     });
 });
 
-router.get("/reply/:bbsid", function(req, res) {
-    if(!req.params.bbsid){
-        res.back(-1,  "缺少帖子id");
-        return 
-    }
-    req.sql.query("SELECT * FROM bbs_reply where bbs_id=?", [req.params.bbsid], function(
-        err,
-        result,
-        fields
-    ) {
-        if (result.length >= 1) {
-            res.back(1, result, "获取成功");
-        } else {
-            res.back(-1,  "没有数据");
-        }
-    });
-}); 
 
 module.exports = router;

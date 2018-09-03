@@ -47,13 +47,13 @@
 
        <mu-text-field v-model="reply" multi-line :rows="4" :rows-max="8" full-width placeholder="评论"></mu-text-field>
        <div class="textRight">
-        <mu-button color="primary">
+        <mu-button color="primary" @click="replyBtn">
           Send
-          <mu-icon right value="send"></mu-icon>
+          <mu-icon right  value="send"></mu-icon>
         </mu-button>
        </div>
-      <div class="replyArr" v-for="item of replyArr" :key="item.id">
-        {{item.reply_content}}
+      <div class="replyArr" v-for="(item,index) of replyArr" :key="item.id">
+        {{replyArr.length-index}}楼，{{item.name}}:{{item.reply_content}}
       </div>
     </div>
 
@@ -122,8 +122,8 @@ export default {
       return;
     }
     var bbs_res = await app.$axios.$get(`/api/v1/bbs/get/${params.id}`);
-    var bbs_reply_res = await app.$axios.$get(`/api/v1/bbs/reply/${params.id}`);
-    console.log(bbs_reply_res);
+    var bbs_reply_res = await app.$axios.$get(`/api/v1/reply/get/${params.id}`);
+    console.log(bbs_res);
     return {
       bbs: bbs_res.data.length == 1 ? bbs_res.data[0] : {},
       replyArr: bbs_reply_res.data
@@ -138,7 +138,15 @@ export default {
       }
     }
   },
-  methods: {},
+  methods: {
+    async replyBtn(){
+      var add_reply = await this.$axios.$post(`/api/v1/reply/add`,{
+        bbsid:this.bbs.id,
+        reply_content:this.reply
+      });
+      this.$toast.message(add_reply.errmsg);
+    }
+  },
   mounted() {
     // this.bbs()
   }

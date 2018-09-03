@@ -74,7 +74,7 @@
         <!-- <mu-button v-else-if="$store.state.user" flat slot="right" @click="logout">{{ $t('index.logout') }}</mu-button> -->
       </mu-appbar>
 
-      <div class="list">
+      <div class="list" ref="container">
         <mu-load-more @refresh="refresh" :refreshing="refreshing" :loading="loading" @load="load">
           <div class="list_item" v-for="item of indexlist" :key="item.id">
 
