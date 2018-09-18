@@ -2,8 +2,18 @@ const { Nuxt, Builder } = require("nuxt");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const app = require("express")();
-var RedisStore = require("connect-redis")(session);
+
 var key = require("./config/key.json");
+
+var redis = require("redis"),
+    client = redis.createClient({
+        host: key.redis.host,
+        port: key.redis.port || 6379,
+        // password: key.redis.pass,
+        no_ready_check:true
+    });
+
+var RedisStore = require("connect-redis")(session);
 
 app.listen(3000);
 
@@ -13,11 +23,10 @@ app.use(bodyParser.json());
 // Sessions 来创建 req.session
 app.use(
     session({
-        // store: new RedisStore({
-        //     host: key.redis.host,
-        //     port: key.redis.port || 6739,
-        //     pass: key.redis.pass
-        // }),
+        store: new RedisStore({
+            client: client,
+            ttl: 600000
+        }),
 
         secret: key.secret || "secret",
         resave: false,
@@ -26,10 +35,11 @@ app.use(
     })
 );
 //检查 redis是否可用
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     if (!req.session) {
         res.send({ errno: -1, data: [], errmsg: "session异常" });
     }
+    req.redis=client;
     next(); // otherwise continue
 });
 

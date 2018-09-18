@@ -41,9 +41,6 @@ var query = function() {
           if (qerr) {
             console.log('mysql 连接错误',qerr);
           }
-          if (result) {
-            // console.log(result);
-          }
           // result.insertId:插入行的id
           // result.affectedRows：受影响行数（insert，update 或者 delete）
           // result.changedRows：被改变的行数update

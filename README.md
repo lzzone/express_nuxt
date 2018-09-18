@@ -1,3 +1,6 @@
+[![node](https://img.shields.io/node/v/node.svg)](http://adtk.cn)
+[![npm](https://img.shields.io/npm/v/npm.svg)](http://adtk.cn)
+
 ## 开发环境
 
 > 如果不可用的话请全局安装`nodemon`

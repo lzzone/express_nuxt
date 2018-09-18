@@ -9,7 +9,8 @@ router.use(function(req, res, next) {
         console.log("body", req.body);
         console.log("query", req.query);
 
-        if (errno !== 1) {
+        if (errno !== 1&&typeof data=="string") {
+            // data为字符串时为错误描述
             errmsg = data;
             data=[];
         }

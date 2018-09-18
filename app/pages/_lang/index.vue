@@ -98,6 +98,16 @@
 
     <mu-drawer :open.sync="open" :docked="docked">
       <mu-list>
+        <mu-list-item button>
+          <mu-list-item-title>美图</mu-list-item-title>
+        </mu-list-item>
+        <mu-list-item button>
+          <mu-list-item-title>收藏网址</mu-list-item-title>
+        </mu-list-item>
+         <mu-list-item button>
+          <mu-list-item-title>音乐播放器</mu-list-item-title>
+        </mu-list-item>
+
         <mu-list-item button  v-if="$store.state.user.id"  @click="logout">
           <mu-list-item-title>退出登录</mu-list-item-title>
         </mu-list-item>

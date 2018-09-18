@@ -12,6 +12,8 @@ import {
     List,
     Snackbar,
     TextField,
+    // Helpers,
+    
 } from "muse-ui";
 
 // import theme from "muse-ui/lib/theme";
@@ -35,6 +37,7 @@ Vue.use(LoadMore);
 Vue.use(List);
 Vue.use(Snackbar);
 Vue.use(TextField);
+// Vue.use(Helpers);
 
 // theme.addCreateTheme(theme => {
 //     return `

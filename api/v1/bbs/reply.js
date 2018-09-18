@@ -22,6 +22,17 @@ router.post("/add", function(req, res) {
         user_id:req.session.user.id
     },function(err,result){
         console.log(err,result)
+        if(err){
+            res.back(-1,  "回复失败");
+        }else if(result){
+            if(result.insertId== 1){
+                res.back(1,  "回复成功");
+            }else{
+                res.back(-1,  "回复失败");
+            }
+        }else{
+            res.back(-1,  "回复失败");
+        }
     })
 })
 router.get("/get/:bbsid", function(req, res) {

@@ -13,7 +13,7 @@
   <div class="bbs">
     <mu-appbar style="width: 100%;" color="primary" :title="bbs.title">
 
-      <mu-button icon slot="left" to="/">
+      <mu-button icon slot="left" :to="$i18n.path('')">
         <mu-icon value="close"></mu-icon>
       </mu-button>
 
@@ -34,18 +34,17 @@
       <div class="markdown-body" v-html="bbsContent"></div>
 
       <div class="evaluate textRight">
-          <mu-button color="primary">
+          <mu-button color="primary" @click="addCollect">
             收藏
             <mu-icon value="favorite_border" right></mu-icon>
-            <!-- favorite -->
           </mu-button>
-          <mu-button color="red">
+          <!-- <mu-button color="red">
             质量低
             <mu-icon value="delete_sweep" right></mu-icon>
-          </mu-button>
+          </mu-button> -->
       </div>
 
-       <mu-text-field v-model="reply" multi-line :rows="4" :rows-max="8" full-width placeholder="评论"></mu-text-field>
+       <mu-text-field v-model="reply" multi-line :rows="4" :rows-max="8" full-width placeholder="这里是可以输入评论的"></mu-text-field>
        <div class="textRight">
         <mu-button color="primary" @click="replyBtn">
           Send
@@ -53,7 +52,12 @@
         </mu-button>
        </div>
       <div class="replyArr" v-for="(item,index) of replyArr" :key="item.id">
-        {{replyArr.length-index}}楼，{{item.name}}:{{item.reply_content}}
+
+                <div>{{replyArr.length-index}}楼，{{item.name}}</div>
+                <div> {{item.reply_content}}</div>
+                <mu-divider></mu-divider>
+
+
       </div>
     </div>
 
@@ -139,13 +143,21 @@ export default {
     }
   },
   methods: {
-    async replyBtn(){
-      var add_reply = await this.$axios.$post(`/api/v1/reply/add`,{
-        bbsid:this.bbs.id,
-        reply_content:this.reply
+    async replyBtn() {
+      var add_reply = await this.$axios.$post(`/api/v1/reply/add`, {
+        bbsid: this.bbs.id,
+        reply_content: this.reply
       });
       this.$toast.message(add_reply.errmsg);
+    },
+    async addCollect() {
+      // 添加收藏
+      var add_Collect = await this.$axios.$post(`/api/v1/collect/add`, {
+        bbsid: this.bbs.id,
+      });
+      this.$toast.message(add_Collect.errmsg);
     }
+
   },
   mounted() {
     // this.bbs()

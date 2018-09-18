@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var xss = require("xss");
+
+
 var bcrypt = require('bcrypt');
 var sendMail=require("../../../config/email.js");
 
@@ -23,22 +26,31 @@ router.post('/login', function (req, res) {
   });
 })
 
-// 邮箱
-router.post('/sendMail',async function (req, res) {
-var code= (Math.random()).toString().substring(2,8);
-  var send=await sendMail(req.body.name,'adtk注册验证码',`<code>${code}<code><br /><span>此验证码仅用于账户注册</span><br /><span>网站不发任何形式广告</span>`);
-  console.log(2);
-  console.log(send);
+// // 邮箱
+// router.post('/sendMail',async function (req, res) {
+// var code= (Math.random()).toString().substring(2,8);
+//   var send=await sendMail(req.body.name,'adtk注册验证码',`<code>${code}<code><br /><span>此验证码仅用于账户注册</span><br /><span>网站不发任何形式广告</span>`);
+//   console.log(2);
+//   console.log(send);
 
-  req.session.email={
-    type:'register',
-    email:req.body.name,
-    code:code
-  };
-  res.back(1,req.session,'邮箱' );
-});
+//   req.session.email={
+//     type:'register',
+//     email:req.body.name,
+//     code:code
+//   };
+//   res.back(1,req.session,'邮箱' );
+// });
+
 // 注册
 router.post('/register', function (req, res) {
+  if(!req.body.name||req.body.name.length>20){
+    res.back(-1,'请输入账号' );
+    return
+  }
+  if(!req.body.pwd||req.body.pwd.length>60){
+    res.back(-1,'请输入密码' );
+    return
+  }
   req.sql.query("SELECT * FROM user WHERE `name` = ? ", [req.body.name], function (err, result, fields) {
     if (err) {
       res.back(-1,err);
