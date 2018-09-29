@@ -78,7 +78,7 @@
         <mu-load-more @refresh="refresh" :refreshing="refreshing" :loading="loading" @load="load">
           <div class="list_item" v-for="item of indexlist" :key="item.id">
 
-                <a class="titlename" :href="$i18n.path('bbs/'+item.id)">{{item.title}}</a>
+                <a class="titlename" :href="$i18n.path('bbs/get/'+item.id)">{{item.title}}</a>
                 <div  class="username">
                     <a :href="$i18n.path('home/'+item.user)">@{{item.username}}</a>
                 </div>

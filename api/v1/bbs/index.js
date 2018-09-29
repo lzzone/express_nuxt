@@ -84,4 +84,31 @@ router.get("/get/:id", function(req, res) {
 });
 
 
+router.post("/add", function(req, res) {
+    if(!req.session.user||!req.session.user.id){
+        res.back(-1, "用户未登录");
+        return
+    }
+    if(!req.body.class_id){
+        res.back(-1, "未选择分类");
+        return
+    }
+    if(!req.body.title || !req.body.content){
+        res.back(-1, "请填写标题与内容");
+        return
+    }
+    req.sql.query(
+        `insert into bbs (class_id,title,content,user) values (?,?,?,${req.session.user.id})`,[req.body.class_id,req.body.title,req.body.content],
+        function(err, result, fields) {
+            console.log(result)
+            if (err) {
+                res.back(-1, "发布失败");
+            } else if (result) {
+                res.back(1, result, "添加成功");
+            }
+        }
+    );
+
+});
+
 module.exports = router;
