@@ -70,8 +70,6 @@
         <mu-button v-if="$store.state.user.id" flat slot="right" :to="$i18n.path('home/'+$store.state.user.id)">{{$store.state.user.name}}</mu-button>
 
         <mu-button v-if="!$store.state.user.id" flat slot="right" :to="$i18n.path('user/login')">{{ $t('index.login') }}</mu-button>
-
-        <!-- <mu-button v-else-if="$store.state.user" flat slot="right" @click="logout">{{ $t('index.logout') }}</mu-button> -->
       </mu-appbar>
 
       <div class="list" ref="container">
@@ -99,21 +97,21 @@
     <mu-drawer :open.sync="open" :docked="docked">
       <mu-list>
         <mu-list-item button>
-          <mu-list-item-title>美图</mu-list-item-title>
+          <mu-list-item-title>{{ $t('index.drawer.image')}}</mu-list-item-title>
         </mu-list-item>
         <mu-list-item button>
-          <mu-list-item-title>收藏网址</mu-list-item-title>
+          <mu-list-item-title>{{ $t('index.drawer.url')}}</mu-list-item-title>
         </mu-list-item>
          <mu-list-item button>
-          <mu-list-item-title>音乐播放器</mu-list-item-title>
+          <mu-list-item-title>{{ $t('index.drawer.music')}}</mu-list-item-title>
         </mu-list-item>
 
         <mu-list-item button  v-if="$store.state.user.id"  @click="logout">
-          <mu-list-item-title>退出登录</mu-list-item-title>
+          <mu-list-item-title>{{ $t('index.logout')}}</mu-list-item-title>
         </mu-list-item>
         
         <mu-list-item @click="open = false" button>
-          <mu-list-item-title>Close</mu-list-item-title>
+          <mu-list-item-title>{{ $t('index.drawer.close')}}</mu-list-item-title>
         </mu-list-item>
       </mu-list>
       <!-- 蜀ICP备15007060号-1 -->

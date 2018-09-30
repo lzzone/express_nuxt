@@ -25,8 +25,8 @@ router.post("/add", function(req, res) {
         if(err){
             res.back(-1,  "回复失败");
         }else if(result){
-            if(result.insertId== 1){
-                res.back(1,  "回复成功");
+            if(result.insertId){
+                res.back(1, {id:result.insertId}, "回复成功");
             }else{
                 res.back(-1,  "回复失败");
             }

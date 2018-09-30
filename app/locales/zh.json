@@ -2,7 +2,13 @@
     "index": {
         "title": "这是标题",
         "login": "登录",
-        "logout": "退出"
+        "logout": "退出登录",
+        "drawer":{
+            "image":"美图",
+            "url":"网址",
+            "music":"音乐",
+            "close":"关闭"
+        }
     },
     "login": {
         "title": "登录",

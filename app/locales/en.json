@@ -2,7 +2,13 @@
     "index": {
         "title": "this is title",
         "login": "login",
-        "logout": "logout"
+        "logout": "logout",
+        "drawer":{
+            "image":"image",
+            "url":"url",
+            "music":"music",
+            "close":"Close"
+        }
     },
     "login": {
         "title": "login",

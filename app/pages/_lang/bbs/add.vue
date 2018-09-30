@@ -93,6 +93,8 @@ export default {
         return {
             title: "发帖",
             bbs: {
+                id:'',
+                class_id:'',
                 title: "",
                 content: "无内容"
             }
@@ -104,8 +106,7 @@ export default {
             link: [
                 {
                     rel: "stylesheet",
-                    href:
-                        " https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css"
+                    href:" https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css"
                 }
             ],
             script: [
@@ -124,13 +125,10 @@ export default {
         if (!query.id) {
             return;
         }
-        var bbs_res = await app.$axios.$get(`/api/v1/bbs/get/${query.id}`);
+        var bbs_res = await app.$axios.$get(`/api/v1/bbs/get?id=${query.id}`);
         console.log(bbs_res);
         return {
-            bbs:
-                bbs_res.errno == 1 && bbs_res.data.length == 1
-                    ? bbs_res.data[0]
-                    : {}
+            bbs:bbs_res.errno == 1 && bbs_res.data.length == 1? bbs_res.data[0]: {}
         };
     },
     computed: {
@@ -150,7 +148,16 @@ export default {
                 content: this.bbs.content
             });
             this.$toast.message(data.errmsg);
-        }
+        },
+        async edit() {
+            var data = await this.$axios.$post(`/api/v1/bbs/edit`, {
+                id:this.bbs.id,
+                class_id: this.bbs.class_id,
+                title: this.bbs.title,
+                content: this.bbs.content
+            });
+            this.$toast.message(data.errmsg);
+        },
     },
     mounted() {}
 };
